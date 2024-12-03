@@ -19,7 +19,7 @@ class AuthService
         ]);
 
         // Generate token
-        $token = $user->createToken('ApiToken')->plainTextToken;
+        $token = $user->createToken('ApiToken')->accessToken;
 
         return response()->json([
             'token' => $token,
