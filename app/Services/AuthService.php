@@ -46,12 +46,18 @@ class AuthService
 
     public function createDevice($request, $user)
     {
-        // Register device
-        $device = Device::create([
-            'user_id' => $user->id,
-            'device_id' => $request->device_id,
-            'is_biometric_enabled' => true
-        ]);
+        // Register or update the device
+        $device = Device::updateOrCreate(
+            [
+                'user_id' => $user->id, // Match on user_id and device_id
+                'device_id' => $request->device_id,
+            ],
+            [
+                'is_biometric_enabled' => true, // Update or set additional fields
+            ]
+        );
+
+        return $device;
     }
 
     public function biometricLogin($request)
