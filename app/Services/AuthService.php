@@ -63,7 +63,7 @@ class AuthService
     public function biometricLogin($request)
     {
         // Find user
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('id', $request->user_id)->first();
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
